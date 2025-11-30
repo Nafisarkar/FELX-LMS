@@ -1,11 +1,11 @@
-import { Link, useRouter } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { Button } from "../button";
 import { ProfileCard } from "./profilecard";
 import Themetoggle from "./themetoggle.tsx";
 import { useUser } from "@/store/userStore.ts";
 
 const Navbar = () => {
-  const { navigate } = useRouter();
+  const navigate = useNavigate();
   const user = useUser((state) => state.user);
 
   return (
@@ -13,30 +13,25 @@ const Navbar = () => {
       <Link to="/" className="text-2xl font-bold font-edu">
         Flex
       </Link>
-      <div className="">
-        <ul className="flex justify-start items-center space-x-3">
-          <Link
-            className="px-3 py-1 bg-orange-500 text-white rounded-md"
-            to={"/"}
-          >
-            Home
-          </Link>
-          <li className="px-3 py-1 bg-orange-500 text-white rounded-md">
-            About
-          </li>
-          <li className="px-3 py-1 bg-orange-500 text-white rounded-md">
-            Contact
-          </li>
-        </ul>
-      </div>
+
       <div className="flex flex-row justify-center items-center gap-4">
         {user ? (
-          <ProfileCard />
+          <div className="flex flex-row gap-4">
+            <Button
+              variant={"outline"}
+              onClick={() => {
+                navigate({ href: "/quiz" });
+              }}
+            >
+              Quiz
+            </Button>
+            <ProfileCard />
+          </div>
         ) : (
           <Button
             variant={"outline"}
             onClick={() => {
-              navigate({ href: "/auth/login" });
+              navigate({ to: "/auth/login" });
             }}
           >
             Login

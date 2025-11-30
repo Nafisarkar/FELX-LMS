@@ -19,7 +19,7 @@ function RouteComponent() {
   }
   const handleProfileLogoutClick = () => {
     logoutUser();
-    
+
     natigator({ to: "/" });
   };
 
@@ -38,7 +38,7 @@ function RouteComponent() {
             <div className="flex items-center gap-3">
               <button
                 onClick={handleProfileLogoutClick}
-                className="rounded-md border px-3 py-1 text-xs uppercase text-muted-foreground hover:bg-muted"
+                className="rounded-md border bg-red-600/20 px-3 py-1 text-xs uppercase  hover:bg-red-600/30"
               >
                 Logout
               </button>

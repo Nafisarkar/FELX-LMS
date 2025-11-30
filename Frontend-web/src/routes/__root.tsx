@@ -51,11 +51,15 @@ function RootComponent() {
         <div className="p-4">
           <Navbar />
           {isConnected ? (
-            <div className="w-full p-2 my-4 text-sm text-center text-white bg-green-400/40 rounded-md border border-green-600">
+            <div
+              className={`w-full p-2 my-4 text-sm text-center  bg-green-400/40 rounded-md border border-green-600`}
+            >
               Server is connected for real-time updates
             </div>
           ) : (
-            <div className="w-full p-2 my-4 text-sm text-center text-gray-800 bg-red-400 rounded-md border border-red-600">
+            <div
+              className={`w-full p-2 my-4 text-sm text-center  bg-red-400/40 rounded-md border border-red-600`}
+            >
               Not connected to real-time server
             </div>
           )}
