@@ -1,9 +1,11 @@
 import { Outlet, createRootRoute } from "@tanstack/react-router";
-import Navbar from "@/components/ui/custome/navbar";
+import Navbar from "@/components/ui/custome/navbar.tsx";
 import { Themeprovider } from "@/components/ui/custome/themeprovider.tsx";
-import { useUser } from "@/store/userStore";
+import { useUser } from "@/store/userStore.ts";
 import React, { useEffect, useState } from "react";
-import { socket } from "@/services/socket";
+import { socket } from "@/services/socket.ts";
+import Loading from "@/components/ui/custome/loading";
+
 
 export const Route = createRootRoute({
   component: RootComponent,
@@ -45,24 +47,33 @@ function RootComponent() {
     }
   }, [user]);
 
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
     <Themeprovider storageKey="vite-ui-theme" defaultTheme="dark">
       <React.Fragment>
         <div className="p-4">
           <Navbar />
-          {isConnected ? (
-            <div
-              className={`w-full p-2 my-4 text-sm text-center  bg-green-400/40 rounded-md border border-green-600`}
-            >
-              Server is connected for real-time updates
-            </div>
-          ) : (
-            <div
-              className={`w-full p-2 my-4 text-sm text-center  bg-red-400/40 rounded-md border border-red-600`}
-            >
-              Not connected to real-time server
-            </div>
+          {user && (
+            <>
+              {isConnected ? (
+                <div
+                  className={`w-full p-2 my-4 text-sm text-center  bg-green-400/40 rounded-md border border-green-600`}
+                >
+                  Server is connected for real-time updates
+                </div>
+              ) : (
+                <div
+                  className={`w-full p-2 my-4 text-sm text-center  bg-red-400/40 rounded-md border border-red-600`}
+                >
+                  Not connected to real-time server
+                </div>
+              )}
+            </>
           )}
+
           <Outlet />
         </div>
       </React.Fragment>

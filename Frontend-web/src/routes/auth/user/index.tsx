@@ -1,5 +1,6 @@
 import { useUser } from "@/store/userStore";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useEffect } from "react";
 
 export const Route = createFileRoute("/auth/user/")({
   component: RouteComponent,
@@ -10,6 +11,18 @@ function RouteComponent() {
   const natigator = useNavigate();
   const logoutUser = useUser((state) => state.logoutUser);
 
+  useEffect(() => {
+    if (!user) {
+      natigator({ to: "/" });
+    }
+  }, [user]);
+
+  const handleProfileLogoutClick = () => {
+    logoutUser();
+
+    natigator({ to: "/" });
+  };
+
   if (!user) {
     return (
       <div className="flex min-h-[200px] items-center justify-center text-sm text-muted-foreground">
@@ -17,12 +30,8 @@ function RouteComponent() {
       </div>
     );
   }
-  const handleProfileLogoutClick = () => {
-    logoutUser();
 
-    natigator({ to: "/" });
-  };
-
+  // Format dates
   const createdAt = new Date(user.createdAt).toLocaleDateString();
   const updatedAt = new Date(user.updatedAt).toLocaleDateString();
 

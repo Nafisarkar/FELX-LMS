@@ -1,7 +1,7 @@
-import Counter from "@/components/Counter";
-import { useTheme } from "@/hooks/useTheme";
-import { socket } from "@/services/socket";
-import { useUser } from "@/store/userStore";
+import Counter from "@/components/Counter.tsx";
+import { useTheme } from "@/hooks/useTheme.tsx";
+import { socket } from "@/services/socket.ts";
+import { useUser } from "@/store/userStore.ts";
 import { useEffect, useState } from "react";
 
 const LiveUserCount = () => {

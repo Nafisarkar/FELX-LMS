@@ -7,17 +7,27 @@ const itemRouter = express.Router();
 
 // read items
 itemRouter.get("/", async (req: Request, res: Response) => {
-  try {
-    const items = await ItemModel.find({});
+  let page = parseInt(req.query.page as string) || 1;
+  let perpage = parseInt(req.query.perpage as string) || 10;
 
+  console.log(page);
+  try {
+    const skip = (page - 1) * perpage;
+
+    const items = await ItemModel.find({}).skip(skip).limit(perpage);
+    const totalitems = await ItemModel.countDocuments({});
     return res.json({
+      page,
+      perpage,
+      totalPages: Math.ceil(totalitems / perpage),
+      totalitems,
       items,
     });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({
-      message: "Error while geting items",
-    });
+   return res.status(500).json({
+     message: "Error while getting items",
+   });
   }
 });
 

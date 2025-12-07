@@ -11,15 +11,15 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as QuizIndexRouteImport } from './routes/quiz/index'
-import { Route as AuthAdminRouteImport } from './routes/auth/admin'
 import { Route as AuthUserIndexRouteImport } from './routes/auth/user/index'
 import { Route as AuthSignupIndexRouteImport } from './routes/auth/signup/index'
 import { Route as AuthLoginIndexRouteImport } from './routes/auth/login/index'
-import { Route as AuthAdminIndexRouteImport } from './routes/auth/admin/index'
+import { Route as AuthAdminLayoutRouteImport } from './routes/auth/admin/layout'
 import { Route as QuizRoomJoinIndexRouteImport } from './routes/quiz/room/join/index'
 import { Route as QuizRoomCreateIndexRouteImport } from './routes/quiz/room/create/index'
 import { Route as AuthLoginSuccessIndexRouteImport } from './routes/auth/login/success/index'
 import { Route as AuthLoginFailedIndexRouteImport } from './routes/auth/login/failed/index'
+import { Route as AuthAdminUpdateIndexRouteImport } from './routes/auth/admin/update/index'
 import { Route as AuthAdminAddIndexRouteImport } from './routes/auth/admin/add/index'
 
 const IndexRoute = IndexRouteImport.update({
@@ -30,11 +30,6 @@ const IndexRoute = IndexRouteImport.update({
 const QuizIndexRoute = QuizIndexRouteImport.update({
   id: '/quiz/',
   path: '/quiz/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthAdminRoute = AuthAdminRouteImport.update({
-  id: '/auth/admin',
-  path: '/auth/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthUserIndexRoute = AuthUserIndexRouteImport.update({
@@ -52,10 +47,10 @@ const AuthLoginIndexRoute = AuthLoginIndexRouteImport.update({
   path: '/auth/login/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthAdminIndexRoute = AuthAdminIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => AuthAdminRoute,
+const AuthAdminLayoutRoute = AuthAdminLayoutRouteImport.update({
+  id: '/auth/admin/layout',
+  path: '/auth/admin/layout',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const QuizRoomJoinIndexRoute = QuizRoomJoinIndexRouteImport.update({
   id: '/quiz/room/join/',
@@ -77,21 +72,26 @@ const AuthLoginFailedIndexRoute = AuthLoginFailedIndexRouteImport.update({
   path: '/auth/login/failed/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthAdminUpdateIndexRoute = AuthAdminUpdateIndexRouteImport.update({
+  id: '/auth/admin/update/',
+  path: '/auth/admin/update/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthAdminAddIndexRoute = AuthAdminAddIndexRouteImport.update({
-  id: '/add/',
-  path: '/add/',
-  getParentRoute: () => AuthAdminRoute,
+  id: '/auth/admin/add/',
+  path: '/auth/admin/add/',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/auth/admin': typeof AuthAdminRouteWithChildren
   '/quiz': typeof QuizIndexRoute
-  '/auth/admin/': typeof AuthAdminIndexRoute
+  '/auth/admin/layout': typeof AuthAdminLayoutRoute
   '/auth/login': typeof AuthLoginIndexRoute
   '/auth/signup': typeof AuthSignupIndexRoute
   '/auth/user': typeof AuthUserIndexRoute
   '/auth/admin/add': typeof AuthAdminAddIndexRoute
+  '/auth/admin/update': typeof AuthAdminUpdateIndexRoute
   '/auth/login/failed': typeof AuthLoginFailedIndexRoute
   '/auth/login/success': typeof AuthLoginSuccessIndexRoute
   '/quiz/room/create': typeof QuizRoomCreateIndexRoute
@@ -100,11 +100,12 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/quiz': typeof QuizIndexRoute
-  '/auth/admin': typeof AuthAdminIndexRoute
+  '/auth/admin/layout': typeof AuthAdminLayoutRoute
   '/auth/login': typeof AuthLoginIndexRoute
   '/auth/signup': typeof AuthSignupIndexRoute
   '/auth/user': typeof AuthUserIndexRoute
   '/auth/admin/add': typeof AuthAdminAddIndexRoute
+  '/auth/admin/update': typeof AuthAdminUpdateIndexRoute
   '/auth/login/failed': typeof AuthLoginFailedIndexRoute
   '/auth/login/success': typeof AuthLoginSuccessIndexRoute
   '/quiz/room/create': typeof QuizRoomCreateIndexRoute
@@ -113,13 +114,13 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/auth/admin': typeof AuthAdminRouteWithChildren
   '/quiz/': typeof QuizIndexRoute
-  '/auth/admin/': typeof AuthAdminIndexRoute
+  '/auth/admin/layout': typeof AuthAdminLayoutRoute
   '/auth/login/': typeof AuthLoginIndexRoute
   '/auth/signup/': typeof AuthSignupIndexRoute
   '/auth/user/': typeof AuthUserIndexRoute
   '/auth/admin/add/': typeof AuthAdminAddIndexRoute
+  '/auth/admin/update/': typeof AuthAdminUpdateIndexRoute
   '/auth/login/failed/': typeof AuthLoginFailedIndexRoute
   '/auth/login/success/': typeof AuthLoginSuccessIndexRoute
   '/quiz/room/create/': typeof QuizRoomCreateIndexRoute
@@ -129,13 +130,13 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/auth/admin'
     | '/quiz'
-    | '/auth/admin/'
+    | '/auth/admin/layout'
     | '/auth/login'
     | '/auth/signup'
     | '/auth/user'
     | '/auth/admin/add'
+    | '/auth/admin/update'
     | '/auth/login/failed'
     | '/auth/login/success'
     | '/quiz/room/create'
@@ -144,11 +145,12 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/quiz'
-    | '/auth/admin'
+    | '/auth/admin/layout'
     | '/auth/login'
     | '/auth/signup'
     | '/auth/user'
     | '/auth/admin/add'
+    | '/auth/admin/update'
     | '/auth/login/failed'
     | '/auth/login/success'
     | '/quiz/room/create'
@@ -156,13 +158,13 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-    | '/auth/admin'
     | '/quiz/'
-    | '/auth/admin/'
+    | '/auth/admin/layout'
     | '/auth/login/'
     | '/auth/signup/'
     | '/auth/user/'
     | '/auth/admin/add/'
+    | '/auth/admin/update/'
     | '/auth/login/failed/'
     | '/auth/login/success/'
     | '/quiz/room/create/'
@@ -171,11 +173,13 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AuthAdminRoute: typeof AuthAdminRouteWithChildren
   QuizIndexRoute: typeof QuizIndexRoute
+  AuthAdminLayoutRoute: typeof AuthAdminLayoutRoute
   AuthLoginIndexRoute: typeof AuthLoginIndexRoute
   AuthSignupIndexRoute: typeof AuthSignupIndexRoute
   AuthUserIndexRoute: typeof AuthUserIndexRoute
+  AuthAdminAddIndexRoute: typeof AuthAdminAddIndexRoute
+  AuthAdminUpdateIndexRoute: typeof AuthAdminUpdateIndexRoute
   AuthLoginFailedIndexRoute: typeof AuthLoginFailedIndexRoute
   AuthLoginSuccessIndexRoute: typeof AuthLoginSuccessIndexRoute
   QuizRoomCreateIndexRoute: typeof QuizRoomCreateIndexRoute
@@ -196,13 +200,6 @@ declare module '@tanstack/react-router' {
       path: '/quiz'
       fullPath: '/quiz'
       preLoaderRoute: typeof QuizIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth/admin': {
-      id: '/auth/admin'
-      path: '/auth/admin'
-      fullPath: '/auth/admin'
-      preLoaderRoute: typeof AuthAdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth/user/': {
@@ -226,12 +223,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthLoginIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/auth/admin/': {
-      id: '/auth/admin/'
-      path: '/'
-      fullPath: '/auth/admin/'
-      preLoaderRoute: typeof AuthAdminIndexRouteImport
-      parentRoute: typeof AuthAdminRoute
+    '/auth/admin/layout': {
+      id: '/auth/admin/layout'
+      path: '/auth/admin/layout'
+      fullPath: '/auth/admin/layout'
+      preLoaderRoute: typeof AuthAdminLayoutRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/quiz/room/join/': {
       id: '/quiz/room/join/'
@@ -261,37 +258,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthLoginFailedIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth/admin/update/': {
+      id: '/auth/admin/update/'
+      path: '/auth/admin/update'
+      fullPath: '/auth/admin/update'
+      preLoaderRoute: typeof AuthAdminUpdateIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/auth/admin/add/': {
       id: '/auth/admin/add/'
-      path: '/add'
+      path: '/auth/admin/add'
       fullPath: '/auth/admin/add'
       preLoaderRoute: typeof AuthAdminAddIndexRouteImport
-      parentRoute: typeof AuthAdminRoute
+      parentRoute: typeof rootRouteImport
     }
   }
 }
 
-interface AuthAdminRouteChildren {
-  AuthAdminIndexRoute: typeof AuthAdminIndexRoute
-  AuthAdminAddIndexRoute: typeof AuthAdminAddIndexRoute
-}
-
-const AuthAdminRouteChildren: AuthAdminRouteChildren = {
-  AuthAdminIndexRoute: AuthAdminIndexRoute,
-  AuthAdminAddIndexRoute: AuthAdminAddIndexRoute,
-}
-
-const AuthAdminRouteWithChildren = AuthAdminRoute._addFileChildren(
-  AuthAdminRouteChildren,
-)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AuthAdminRoute: AuthAdminRouteWithChildren,
   QuizIndexRoute: QuizIndexRoute,
+  AuthAdminLayoutRoute: AuthAdminLayoutRoute,
   AuthLoginIndexRoute: AuthLoginIndexRoute,
   AuthSignupIndexRoute: AuthSignupIndexRoute,
   AuthUserIndexRoute: AuthUserIndexRoute,
+  AuthAdminAddIndexRoute: AuthAdminAddIndexRoute,
+  AuthAdminUpdateIndexRoute: AuthAdminUpdateIndexRoute,
   AuthLoginFailedIndexRoute: AuthLoginFailedIndexRoute,
   AuthLoginSuccessIndexRoute: AuthLoginSuccessIndexRoute,
   QuizRoomCreateIndexRoute: QuizRoomCreateIndexRoute,

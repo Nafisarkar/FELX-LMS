@@ -17,6 +17,17 @@ const Navbar = () => {
       <div className="flex flex-row justify-center items-center gap-4">
         {user ? (
           <div className="flex flex-row gap-4">
+            {user.role === "admin" && (
+              <Button
+                variant={"outline"}
+                onClick={() => {
+                  navigate({ to: "/auth/admin" });
+                }}
+              >
+                Admin
+              </Button>
+            )}
+
             <Button
               variant={"outline"}
               onClick={() => {
