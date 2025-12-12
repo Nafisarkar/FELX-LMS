@@ -10,7 +10,7 @@ const Themetoggle = () => {
   };
 
   return (
-    <Button variant={"outline"} size={"icon"} onClick={handleToogleButton}>
+    <Button variant={"secondary"} size={"icon"} onClick={handleToogleButton}>
       {theme === "light" ? (
         <MoonIcon className="cursor-pointer" />
       ) : (

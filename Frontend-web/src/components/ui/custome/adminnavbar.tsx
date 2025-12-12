@@ -7,8 +7,8 @@ const AdminNavbar = () => {
   return (
     <div className="flex justify-between items-center ">
       <Button
-        className="flex gap-4 items-center"
-        variant={"secondary"}
+        className="flex gap-4 items-center text-foreground"
+        variant={"link"}
         onClick={() => {
           navigate({ to: "/auth/admin" });
         }}

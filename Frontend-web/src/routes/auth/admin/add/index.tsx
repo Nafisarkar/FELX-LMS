@@ -60,7 +60,10 @@ function RouteComponent() {
 
   return (
     <div className="flex flex-col gap-4 mt-4">
-      <Button className="flex gap-4 items-center w-fit" variant={"ghost"}>
+      <Button
+        className="flex gap-4 items-center w-fit text-foreground"
+        variant={"link"}
+      >
         <SquarePen />
         <h1 className="text-md ">Add New Question</h1>
       </Button>

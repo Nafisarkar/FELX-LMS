@@ -19,7 +19,8 @@ const Navbar = () => {
           <div className="flex flex-row gap-4">
             {user.role === "admin" && (
               <Button
-                variant={"outline"}
+                variant={"link"}
+                className="text-foreground"
                 onClick={() => {
                   navigate({ to: "/auth/admin" });
                 }}
@@ -29,7 +30,8 @@ const Navbar = () => {
             )}
 
             <Button
-              variant={"outline"}
+              variant={"link"}
+              className="text-foreground"
               onClick={() => {
                 navigate({ href: "/quiz" });
               }}
