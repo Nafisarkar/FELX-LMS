@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import {
   Table,
   TableBody,
@@ -25,6 +25,7 @@ export const Route = createFileRoute("/auth/admin/")({
 });
 
 function RouteComponent() {
+  const navigate = useNavigate();
   const [data, setData] = useState<Tquiz[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -77,7 +78,15 @@ function RouteComponent() {
         </TableHeader>
         <TableBody>
           {data.map((item: Tquiz) => (
-            <TableRow key={item._id}>
+            <TableRow
+              key={item._id}
+              onClick={() => {
+                navigate({
+                  to: `/auth/admin/update/$id`,
+                  params: { id: item._id },
+                });
+              }}
+            >
               <TableCell className="font-medium">{item._id}</TableCell>
               <TableCell>{item.question}</TableCell>
               <TableCell className="text-center">{item.options[0]}</TableCell>

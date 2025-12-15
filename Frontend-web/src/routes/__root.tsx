@@ -6,7 +6,6 @@ import React, { useEffect, useState } from "react";
 import { socket } from "@/services/socket.ts";
 import Loading from "@/components/ui/custome/loading";
 
-
 export const Route = createRootRoute({
   component: RootComponent,
 });
@@ -45,7 +44,7 @@ function RootComponent() {
         socket.disconnect();
       };
     }
-  }, [user]);
+  }, [user?.id]);
 
   if (isLoading) {
     return <Loading />;

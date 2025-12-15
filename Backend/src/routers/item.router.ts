@@ -25,11 +25,43 @@ itemRouter.get("/", async (req: Request, res: Response) => {
     });
   } catch (error) {
     console.error(error);
-   return res.status(500).json({
-     message: "Error while getting items",
-   });
+    return res.status(500).json({
+      message: "Error while getting items",
+    });
   }
 });
+
+//get a item by id
+itemRouter.get(
+  "/:id",
+  isAdmin,
+  async (req: Request<{ id: string }, {}, Iitem>, res: Response) => {
+    try {
+      const id = req.params.id;
+
+      if (!Types.ObjectId.isValid(id)) {
+        return res.json({
+          message: "Not a valid id",
+        });
+      }
+
+      const findItem = await ItemModel.findById(id);
+
+      if (!findItem) {
+        return res.json({
+          message: "Not found",
+        });
+      }
+
+      return res.json({
+        findItem,
+      });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: "Error while finding item" });
+    }
+  },
+);
 
 // add item
 itemRouter.post(
@@ -62,7 +94,7 @@ itemRouter.post(
       console.error(error);
       return res.status(500).json({ message: "Error while adding item" });
     }
-  }
+  },
 );
 
 // remove item
@@ -95,7 +127,7 @@ itemRouter.delete(
       console.error(error);
       return res.status(500).json({ message: "Error while deleting item" });
     }
-  }
+  },
 );
 
 // update item
@@ -135,7 +167,7 @@ itemRouter.patch(
       console.error(error);
       return res.status(500).json({ message: "Error while adding item" });
     }
-  }
+  },
 );
 
 export default itemRouter;

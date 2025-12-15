@@ -21,7 +21,7 @@ import { Route as QuizRoomCreateIndexRouteImport } from './routes/quiz/room/crea
 import { Route as AuthLoginSuccessIndexRouteImport } from './routes/auth/login/success/index'
 import { Route as AuthLoginFailedIndexRouteImport } from './routes/auth/login/failed/index'
 import { Route as AuthAdminAddIndexRouteImport } from './routes/auth/admin/add/index'
-import { Route as AuthAdminUpdateIdRouteImport } from './routes/auth/admin/update/$id'
+import { Route as AuthAdminUpdateIdRouteImport } from './routes/auth/admin/update/$Id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -84,8 +84,8 @@ const AuthAdminAddIndexRoute = AuthAdminAddIndexRouteImport.update({
   getParentRoute: () => AuthAdminRoute,
 } as any)
 const AuthAdminUpdateIdRoute = AuthAdminUpdateIdRouteImport.update({
-  id: '/update/$id',
-  path: '/update/$id',
+  id: '/update/$Id',
+  path: '/update/$Id',
   getParentRoute: () => AuthAdminRoute,
 } as any)
 
@@ -97,7 +97,7 @@ export interface FileRoutesByFullPath {
   '/auth/login': typeof AuthLoginIndexRoute
   '/auth/signup': typeof AuthSignupIndexRoute
   '/auth/user': typeof AuthUserIndexRoute
-  '/auth/admin/update/$id': typeof AuthAdminUpdateIdRoute
+  '/auth/admin/update/$Id': typeof AuthAdminUpdateIdRoute
   '/auth/admin/add': typeof AuthAdminAddIndexRoute
   '/auth/login/failed': typeof AuthLoginFailedIndexRoute
   '/auth/login/success': typeof AuthLoginSuccessIndexRoute
@@ -111,7 +111,7 @@ export interface FileRoutesByTo {
   '/auth/login': typeof AuthLoginIndexRoute
   '/auth/signup': typeof AuthSignupIndexRoute
   '/auth/user': typeof AuthUserIndexRoute
-  '/auth/admin/update/$id': typeof AuthAdminUpdateIdRoute
+  '/auth/admin/update/$Id': typeof AuthAdminUpdateIdRoute
   '/auth/admin/add': typeof AuthAdminAddIndexRoute
   '/auth/login/failed': typeof AuthLoginFailedIndexRoute
   '/auth/login/success': typeof AuthLoginSuccessIndexRoute
@@ -127,7 +127,7 @@ export interface FileRoutesById {
   '/auth/login/': typeof AuthLoginIndexRoute
   '/auth/signup/': typeof AuthSignupIndexRoute
   '/auth/user/': typeof AuthUserIndexRoute
-  '/auth/admin/update/$id': typeof AuthAdminUpdateIdRoute
+  '/auth/admin/update/$Id': typeof AuthAdminUpdateIdRoute
   '/auth/admin/add/': typeof AuthAdminAddIndexRoute
   '/auth/login/failed/': typeof AuthLoginFailedIndexRoute
   '/auth/login/success/': typeof AuthLoginSuccessIndexRoute
@@ -144,7 +144,7 @@ export interface FileRouteTypes {
     | '/auth/login'
     | '/auth/signup'
     | '/auth/user'
-    | '/auth/admin/update/$id'
+    | '/auth/admin/update/$Id'
     | '/auth/admin/add'
     | '/auth/login/failed'
     | '/auth/login/success'
@@ -158,7 +158,7 @@ export interface FileRouteTypes {
     | '/auth/login'
     | '/auth/signup'
     | '/auth/user'
-    | '/auth/admin/update/$id'
+    | '/auth/admin/update/$Id'
     | '/auth/admin/add'
     | '/auth/login/failed'
     | '/auth/login/success'
@@ -173,7 +173,7 @@ export interface FileRouteTypes {
     | '/auth/login/'
     | '/auth/signup/'
     | '/auth/user/'
-    | '/auth/admin/update/$id'
+    | '/auth/admin/update/$Id'
     | '/auth/admin/add/'
     | '/auth/login/failed/'
     | '/auth/login/success/'
@@ -280,10 +280,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthAdminAddIndexRouteImport
       parentRoute: typeof AuthAdminRoute
     }
-    '/auth/admin/update/$id': {
-      id: '/auth/admin/update/$id'
-      path: '/update/$id'
-      fullPath: '/auth/admin/update/$id'
+    '/auth/admin/update/$Id': {
+      id: '/auth/admin/update/$Id'
+      path: '/update/$Id'
+      fullPath: '/auth/admin/update/$Id'
       preLoaderRoute: typeof AuthAdminUpdateIdRouteImport
       parentRoute: typeof AuthAdminRoute
     }

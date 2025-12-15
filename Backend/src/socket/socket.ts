@@ -8,17 +8,17 @@ const rooms: Record<string, roomType> = {};
 
 const socketController = (io: Server) => {
   io.on("connection", (socket: Socket) => {
-    console.log("User Connected:", socket.id);
+    console.log(`[User] ${socket.id}`);
     io.emit("userCount", io.engine.clientsCount);
-
+    console.log("[SOCKET USER COUNT] ", io.engine.clientsCount);
     socket.on("request_user_count", () => {
       socket.emit("userCount", io.engine.clientsCount);
     });
 
-    socket.on("disconnect", () => {
+    socket.on("disconnect", (reason) => {
+      console.log(`[User] ${socket.id} disconnected [R] ${reason}`);
       setTimeout(() => {
         io.emit("userCount", io.engine.clientsCount);
-        console.log("User disconnected:", socket.id);
       }, 100);
     });
 

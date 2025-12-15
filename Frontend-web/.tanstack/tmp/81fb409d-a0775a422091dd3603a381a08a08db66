@@ -1,0 +1,10 @@
+import { createFileRoute, useParams } from "@tanstack/react-router";
+
+export const Route = createFileRoute("/auth/admin/update/")({
+  component: RouteComponent,
+});
+
+function RouteComponent() {
+  const { $id } = useParams();
+  return <div>Hello "/auth/admin/update/$id"!</div>;
+}
